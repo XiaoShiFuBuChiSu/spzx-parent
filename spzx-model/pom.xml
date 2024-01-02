@@ -20,7 +20,6 @@
     </properties>
 
     <dependencies>
-
         <!-- lombok的依赖 -->
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -32,6 +31,16 @@
             <artifactId>fastjson</artifactId>
         </dependency>
 
-    </dependencies>
+        <!-- 加入数据校验 -->
+        <dependency>
+            <groupId>org.hibernate.validator</groupId>
+            <artifactId>hibernate-validator</artifactId>
+        </dependency>
 
+        <!-- Swagger -->
+        <dependency>
+            <groupId>com.github.xiaoymin</groupId>
+            <artifactId>knife4j-openapi3-jakarta-spring-boot-starter</artifactId>
+        </dependency>
+    </dependencies>
 </project>
