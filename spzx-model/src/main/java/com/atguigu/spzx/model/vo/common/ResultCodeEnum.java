@@ -6,13 +6,25 @@ import lombok.Getter;
 public enum ResultCodeEnum {
 
     SUCCESS(200, "操作成功"),
-    LOGIN_ERROR(201, "用户名或者密码错误"),
-    ACCOUNT_DISABLED(201, "用户已被禁用");
+
+    // 101 ~ 199 参数错误
+    PARAM_EMPTY_ERROR(101, "参数不能为空"),
+
+    // 201 ~ 299 登录、权限错误
+    LOGIN_USERNAME_ERROR(201, "用户不存在"),
+
+    LOGIN_PASSWORD_ERROR(202, "用户密码错误"),
+
+    LOGIN_ACCOUNT_DISABLED(203, "用户已被禁用"),
+
+    LOGIN_VERIFY_CODE_ERROR(204, "验证码错误"),
+
+    LOGIN_AUTH_ERROR(205, "用户未登录或登录超时");
 
     private Integer code;      // 业务状态码
     private String message;    // 响应消息
 
-    private ResultCodeEnum(Integer code, String message) {
+    ResultCodeEnum(Integer code, String message) {
         this.code = code;
         this.message = message;
     }

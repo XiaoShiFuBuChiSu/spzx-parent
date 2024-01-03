@@ -2,6 +2,7 @@ package com.atguigu.spzx.manager.service;
 
 import com.atguigu.spzx.model.dto.system.LoginDto;
 import com.atguigu.spzx.model.vo.system.LoginVo;
+import com.atguigu.spzx.model.vo.system.UserInfoVo;
 
 /**
  * @Description TODO
@@ -10,4 +11,8 @@ import com.atguigu.spzx.model.vo.system.LoginVo;
  */
 public interface SysUserService {
     LoginVo userLogin(LoginDto loginDto);
+
+    UserInfoVo getUserOnRedis(String token);
+
+    void userLogout(String token);
 }

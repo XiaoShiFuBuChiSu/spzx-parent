@@ -1,4 +1,4 @@
-package com.atguigu.spzx.manager.ex;
+package com.atguigu.spzx.common.service.execption;
 
 import com.atguigu.spzx.model.vo.common.ResultCodeEnum;
 import lombok.Data;

@@ -14,8 +14,14 @@ import lombok.Data;
 public class LoginDto {
     @NotEmpty(message = "用户名不能为空")
     @Schema(description = "用户名")
-    private String username;
+    private String userName;
     @NotEmpty(message = "用户密码不能为空")
     @Schema(description = "用户密码")
     private String password;
+    @NotEmpty(message = "验证码不能为空")
+    @Schema(description = "验证码")
+    private String captcha;
+    @NotEmpty(message = "验证码不存在")
+    @Schema(description = "验证码key")
+    private String codeKey;
 }

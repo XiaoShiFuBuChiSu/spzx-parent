@@ -1,6 +1,6 @@
-package com.atguigu.spzx.manager.ex.resolver;
+package com.atguigu.spzx.common.service.execption.resolver;
 
-import com.atguigu.spzx.manager.ex.GlobalResultException;
+import com.atguigu.spzx.common.service.execption.GlobalResultException;
 import com.atguigu.spzx.model.vo.common.Result;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 /**
- * @Description TODO
+ * @Description 全局异常处理
  * @Author 王俊然
  * @Date 2024/1/2 14:57
  */
@@ -46,7 +46,8 @@ public class GlobalExceptionResolver {
      */
     @ExceptionHandler(RuntimeException.class)
     public Result headOthers(RuntimeException e) {
-        log.error(e.getMessage());
+        // log.error(e.getMessage());
+        e.printStackTrace();
         return Result.build(null, 500, "未知错误");
     }
 }
