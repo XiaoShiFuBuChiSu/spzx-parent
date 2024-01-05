@@ -1,4 +1,4 @@
-package com.atguigu.spzx.manager.config;
+package com.atguigu.spzx.common.service.config;
 
 /**
  * @Description TODO

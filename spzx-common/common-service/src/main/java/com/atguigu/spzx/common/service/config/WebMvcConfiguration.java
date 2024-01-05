@@ -1,4 +1,4 @@
-package com.atguigu.spzx.manager.config;
+package com.atguigu.spzx.common.service.config;
 
 import com.atguigu.spzx.common.service.interceptor.LoginAuthInterceptor;
 import com.atguigu.spzx.model.properties.AuthExcludeUrlProperty;

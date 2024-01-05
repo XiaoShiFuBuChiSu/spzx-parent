@@ -23,7 +23,7 @@ public class GlobalExceptionResolver {
      */
     @ExceptionHandler(GlobalResultException.class)
     public Result handleGlobal(GlobalResultException e) {
-        log.error(e.getMessage());
+        e.printStackTrace();
         return Result.build(null, e.getCode(), e.getMessage());
     }
 
@@ -35,7 +35,7 @@ public class GlobalExceptionResolver {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public Result handleValid(MethodArgumentNotValidException e) {
         String msg = e.getAllErrors().get(0).getDefaultMessage();
-        log.error(msg);
+        e.printStackTrace();
         return Result.build(null, 202, msg);
     }
 
@@ -46,7 +46,6 @@ public class GlobalExceptionResolver {
      */
     @ExceptionHandler(RuntimeException.class)
     public Result headOthers(RuntimeException e) {
-        // log.error(e.getMessage());
         e.printStackTrace();
         return Result.build(null, 500, "未知错误");
     }

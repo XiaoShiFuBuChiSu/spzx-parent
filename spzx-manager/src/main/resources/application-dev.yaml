@@ -33,3 +33,9 @@ spzx:
       urls:
         - /system/login
         - /system/validateCode
+        # 开放swagger
+        - /doc.html
+        - /webjars/css/**
+        - /webjars/js/**
+        - /v3/api-docs/**
+        - /favicon.ico
