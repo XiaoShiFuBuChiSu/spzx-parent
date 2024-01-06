@@ -6,10 +6,13 @@ import com.atguigu.spzx.common.service.utils.AuthContextUtil;
 import com.atguigu.spzx.manager.mapper.SysUserMapper;
 import com.atguigu.spzx.manager.service.SysUserService;
 import com.atguigu.spzx.model.dto.system.LoginDto;
+import com.atguigu.spzx.model.dto.system.SysUserDto;
 import com.atguigu.spzx.model.entity.system.SysUser;
 import com.atguigu.spzx.model.vo.common.ResultCodeEnum;
 import com.atguigu.spzx.model.vo.system.LoginVo;
 import com.atguigu.spzx.model.vo.system.UserInfoVo;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +22,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.DigestUtils;
 
+import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
@@ -32,15 +36,15 @@ import java.util.concurrent.TimeUnit;
 public class SysUserServiceImpl implements SysUserService {
 
     @Autowired
-    private SysUserMapper systemUserMapper;
+    private SysUserMapper sysUserMapper;
 
     @Autowired
-    private RedisTemplate<String,String> redisTemplate;
+    private RedisTemplate<String, String> redisTemplate;
 
     @Override
     @Transactional(readOnly = true)
     public LoginVo userLogin(LoginDto loginDto) {
-        SysUser systemUser = systemUserMapper.selectUserByUsername(loginDto.getUserName());
+        SysUser systemUser = sysUserMapper.selectUserByUsername(loginDto.getUserName());
         // 校验验证码
         Object code = redisTemplate.opsForValue().get("user:login:validate:" + loginDto.getCodeKey());
         if (code == null || !StringUtils.equalsAnyIgnoreCase(String.valueOf(code), loginDto.getCaptcha())) {
@@ -93,5 +97,38 @@ public class SysUserServiceImpl implements SysUserService {
     @Override
     public void userLogout(String token) {
         redisTemplate.delete("user:login:" + token);
+    }
+
+    @Override
+    public PageInfo<SysUser> queryPageList(Integer current, Integer limit, SysUserDto sysUserDto) {
+        PageHelper.startPage(current, limit);
+        List<SysUser> list = sysUserMapper.selectPageList(sysUserDto);
+        PageInfo<SysUser> pageInfo = new PageInfo<>(list);
+        return pageInfo;
+    }
+
+    @Override
+    public boolean addUser(SysUser sysUser) {
+        String password = DigestUtils.md5DigestAsHex(sysUser.getPassword().getBytes());
+        sysUser.setPassword(password);
+        int res = sysUserMapper.insertSysUser(sysUser);
+        return res > 0;
+    }
+
+    @Override
+    public boolean modifyUser(SysUser sysUser) {
+        int res = sysUserMapper.updateSysUser(sysUser);
+        return res > 0;
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public SysUser getById(Long id) {
+        return sysUserMapper.selectUserById(id);
+    }
+
+    @Override
+    public boolean removeById(Long id) {
+        return sysUserMapper.deleteById(id) > 0;
     }
 }
