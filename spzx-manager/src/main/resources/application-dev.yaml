@@ -41,3 +41,8 @@ spzx:
         - /webjars/js/**
         - /v3/api-docs/**
         - /favicon.ico
+  minio:
+    end-point: http://192.168.11.222:9001
+    bucket-name: spzx
+    access-key: admin
+    secret-key: admin123456
