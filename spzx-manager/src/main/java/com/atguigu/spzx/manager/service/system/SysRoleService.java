@@ -1,4 +1,4 @@
-package com.atguigu.spzx.manager.service;
+package com.atguigu.spzx.manager.service.system;
 
 import com.atguigu.spzx.model.dto.system.AssignRoleDto;
 import com.atguigu.spzx.model.dto.system.SysRoleDto;

@@ -1,6 +1,6 @@
-package com.atguigu.spzx.manager.controller;
+package com.atguigu.spzx.manager.controller.system;
 
-import com.atguigu.spzx.manager.service.SysRoleService;
+import com.atguigu.spzx.manager.service.system.SysRoleService;
 import com.atguigu.spzx.model.dto.system.AssignRoleDto;
 import com.atguigu.spzx.model.dto.system.SysRoleDto;
 import com.atguigu.spzx.model.entity.system.SysRole;

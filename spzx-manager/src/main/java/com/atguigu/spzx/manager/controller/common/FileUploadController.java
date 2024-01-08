@@ -1,6 +1,6 @@
-package com.atguigu.spzx.manager.controller;
+package com.atguigu.spzx.manager.controller.common;
 
-import com.atguigu.spzx.manager.service.FileUploadService;
+import com.atguigu.spzx.manager.service.common.FileUploadService;
 import com.atguigu.spzx.model.vo.common.Result;
 import com.atguigu.spzx.model.vo.common.ResultCodeEnum;
 import io.swagger.v3.oas.annotations.Operation;

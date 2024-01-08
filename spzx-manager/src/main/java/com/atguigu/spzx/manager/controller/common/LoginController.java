@@ -1,13 +1,13 @@
-package com.atguigu.spzx.manager.controller;
+package com.atguigu.spzx.manager.controller.common;
 
-import com.atguigu.spzx.manager.service.SysUserService;
-import com.atguigu.spzx.manager.service.ValidateCodeService;
+import com.atguigu.spzx.manager.service.system.SysUserService;
+import com.atguigu.spzx.manager.service.common.ValidateCodeService;
 import com.atguigu.spzx.model.dto.system.LoginDto;
 import com.atguigu.spzx.model.vo.common.Result;
 import com.atguigu.spzx.model.vo.common.ResultCodeEnum;
-import com.atguigu.spzx.model.vo.system.LoginVo;
+import com.atguigu.spzx.model.vo.common.LoginVo;
 import com.atguigu.spzx.model.vo.system.UserInfoVo;
-import com.atguigu.spzx.model.vo.system.ValidateCodeVo;
+import com.atguigu.spzx.model.vo.common.ValidateCodeVo;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.Parameters;

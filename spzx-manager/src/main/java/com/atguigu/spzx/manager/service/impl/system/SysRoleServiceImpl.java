@@ -1,7 +1,7 @@
-package com.atguigu.spzx.manager.service.impl;
+package com.atguigu.spzx.manager.service.impl.system;
 
-import com.atguigu.spzx.manager.mapper.SysRoleMapper;
-import com.atguigu.spzx.manager.service.SysRoleService;
+import com.atguigu.spzx.manager.mapper.system.SysRoleMapper;
+import com.atguigu.spzx.manager.service.system.SysRoleService;
 import com.atguigu.spzx.model.dto.system.AssignRoleDto;
 import com.atguigu.spzx.model.dto.system.SysRoleDto;
 import com.atguigu.spzx.model.entity.system.SysRole;
@@ -12,10 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 @Transactional
@@ -84,7 +81,9 @@ public class SysRoleServiceImpl implements SysRoleService {
     @Override
     public boolean assignRoleForUser(AssignRoleDto assignRoleDto) {
         int removeResult = sysRoleMapper.deleteAssignedRole(assignRoleDto.getUserId());
-        int addResult = sysRoleMapper.assignRole(assignRoleDto);
+        if (!assignRoleDto.getRoleIds().isEmpty()) {
+            int addResult = sysRoleMapper.assignRole(assignRoleDto);
+        }
         return true;
     }
 }

@@ -1,4 +1,4 @@
-package com.atguigu.spzx.manager.service;
+package com.atguigu.spzx.manager.service.common;
 
 import org.springframework.web.multipart.MultipartFile;
 

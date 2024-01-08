@@ -2,18 +2,27 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.atguigu.spzx.manager.mapper.SysMenuMapper">
+<mapper namespace="com.atguigu.spzx.manager.mapper.system.SysMenuMapper">
 
-    <resultMap id="BaseResultMap" type="com.atguigu.spzx.model.entity.system.SysMenu">
-            <id property="id" column="id" jdbcType="BIGINT"/>
-            <id property="isDeleted" column="is_deleted" jdbcType="TINYINT"/>
-            <result property="parentId" column="parent_id" jdbcType="BIGINT"/>
-            <result property="title" column="title" jdbcType="VARCHAR"/>
-            <result property="component" column="component" jdbcType="VARCHAR"/>
-            <result property="sortValue" column="sort_value" jdbcType="INTEGER"/>
-            <result property="status" column="status" jdbcType="TINYINT"/>
-            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
-            <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+    <resultMap id="BaseResultMap" type="sysMenu">
+        <id property="id" column="id" jdbcType="BIGINT"/>
+        <result property="isDeleted" column="is_deleted" jdbcType="TINYINT"/>
+        <result property="parentId" column="parent_id" jdbcType="BIGINT"/>
+        <result property="title" column="title" jdbcType="VARCHAR"/>
+        <result property="component" column="component" jdbcType="VARCHAR"/>
+        <result property="sortValue" column="sort_value" jdbcType="INTEGER"/>
+        <result property="status" column="status" jdbcType="TINYINT"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <resultMap id="MenuTreeResultMap" type="menuTreeVo">
+        <id property="id" column="id" jdbcType="BIGINT"/>
+        <result property="parentId" column="parent_id" jdbcType="BIGINT"/>
+        <result property="title" column="title" jdbcType="VARCHAR"/>
+        <result property="component" column="component" jdbcType="VARCHAR"/>
+        <result property="sortValue" column="sort_value" jdbcType="INTEGER"/>
+        <result property="status" column="status" jdbcType="TINYINT"/>
     </resultMap>
 
     <sql id="BaseColumns">
@@ -21,4 +30,71 @@
         title,component,sort_value,
         status,create_time,update_time
     </sql>
+    <sql id="InsertColumns">
+        parent_id,title,
+        component,sort_value,status
+    </sql>
+    <insert id="insertSysMenu">
+        insert into sys_menu (<include refid="InsertColumns"/>)
+        values (#{parentId},#{title},#{component},#{sortValue},#{status})
+    </insert>
+    <insert id="insertSysRoleMenu">
+        insert into sys_role_menu (role_id,menu_id,is_half)
+        values
+        <foreach collection="menuIdList" item="roleMenu" separator=",">
+            (#{roleId},#{roleMenu.menuId},#{roleMenu.isHalf})
+        </foreach>
+    </insert>
+    <update id="updateSysMenu">
+        update sys_menu
+        <set>
+            <if test="title != null and title != ''">
+                title = #{title},
+            </if>
+            <if test="component !=null and component != '' ">
+                component = #{component},
+            </if>
+            <if test="sortValue != null ">
+                sort_value = #{sortValue},
+            </if>
+            <if test="status != null">
+                status = #{status},
+            </if>
+            id = #{id}
+        </set>
+        where id = #{id}
+    </update>
+    <update id="deleteById">
+        update sys_menu
+        set is_deleted = 1
+        where id = #{id}
+    </update>
+    <delete id="deleteMenusByRoleId">
+        delete
+        from sys_role_menu
+        where role_id = #{roleId}
+    </delete>
+    <select id="selectAllMenus" resultMap="MenuTreeResultMap">
+        select
+        <include refid="BaseColumns"/>
+        from sys_menu
+        where is_deleted = 0
+        order by sort_value
+    </select>
+    <select id="selectMenuById" resultType="com.atguigu.spzx.model.entity.system.SysMenu">
+        select
+        <include refid="BaseColumns"/>
+        from sys_menu where id = #{id} and is_deleted = 0
+    </select>
+    <select id="getMenusByRoleId" resultType="long">
+        select menu_id
+        from sys_role_menu
+        where role_id = #{roleId}
+          and is_half = 0
+    </select>
+    <select id="getChildrenNum" resultType="java.lang.Integer">
+        select count(*)
+        from sys_menu
+        where parent_id = #{id} and is_deleted = 0
+    </select>
 </mapper>

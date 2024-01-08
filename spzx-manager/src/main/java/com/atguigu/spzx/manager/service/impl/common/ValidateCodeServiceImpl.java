@@ -1,9 +1,9 @@
-package com.atguigu.spzx.manager.service.impl;
+package com.atguigu.spzx.manager.service.impl.common;
 
 import cn.hutool.captcha.CaptchaUtil;
 import cn.hutool.captcha.CircleCaptcha;
-import com.atguigu.spzx.manager.service.ValidateCodeService;
-import com.atguigu.spzx.model.vo.system.ValidateCodeVo;
+import com.atguigu.spzx.manager.service.common.ValidateCodeService;
+import com.atguigu.spzx.model.vo.common.ValidateCodeVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;

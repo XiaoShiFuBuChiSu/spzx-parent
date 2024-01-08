@@ -23,12 +23,12 @@ spring:
 mybatis:
   # 配置Mapper映射文件存放的路径
   mapper-locations: classpath:mapper/*.xml
-  # 别名
   configuration:
     #开启驼峰映射
     map-underscore-to-camel-case: true
     #在控制台打印日志
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  # 别名
   type-aliases-package: com.atguigu.spzx.model
 
 spzx:

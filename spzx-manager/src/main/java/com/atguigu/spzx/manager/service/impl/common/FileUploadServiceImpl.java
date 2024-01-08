@@ -1,8 +1,8 @@
-package com.atguigu.spzx.manager.service.impl;
+package com.atguigu.spzx.manager.service.impl.common;
 
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.io.FileUtil;
-import com.atguigu.spzx.manager.service.FileUploadService;
+import com.atguigu.spzx.manager.service.common.FileUploadService;
 import com.atguigu.spzx.model.properties.MinioConfigProperty;
 import io.minio.BucketExistsArgs;
 import io.minio.MakeBucketArgs;

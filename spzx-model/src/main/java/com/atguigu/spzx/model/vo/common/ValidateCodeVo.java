@@ -1,4 +1,4 @@
-package com.atguigu.spzx.model.vo.system;
+package com.atguigu.spzx.model.vo.common;
 
 import lombok.Data;
 

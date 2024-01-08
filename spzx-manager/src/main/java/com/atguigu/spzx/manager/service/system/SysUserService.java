@@ -1,9 +1,9 @@
-package com.atguigu.spzx.manager.service;
+package com.atguigu.spzx.manager.service.system;
 
 import com.atguigu.spzx.model.dto.system.LoginDto;
 import com.atguigu.spzx.model.dto.system.SysUserDto;
 import com.atguigu.spzx.model.entity.system.SysUser;
-import com.atguigu.spzx.model.vo.system.LoginVo;
+import com.atguigu.spzx.model.vo.common.LoginVo;
 import com.atguigu.spzx.model.vo.system.UserInfoVo;
 import com.github.pagehelper.PageInfo;
 

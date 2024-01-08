@@ -1,4 +1,4 @@
-package com.atguigu.spzx.manager.mapper;
+package com.atguigu.spzx.manager.mapper.system;
 
 import com.atguigu.spzx.model.dto.system.SysUserDto;
 import com.atguigu.spzx.model.entity.system.SysUser;
