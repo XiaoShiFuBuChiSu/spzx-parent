@@ -1,6 +1,7 @@
 package com.atguigu.spzx.manager.controller;
 
 import com.atguigu.spzx.manager.service.SysRoleService;
+import com.atguigu.spzx.model.dto.system.AssignRoleDto;
 import com.atguigu.spzx.model.dto.system.SysRoleDto;
 import com.atguigu.spzx.model.entity.system.SysRole;
 import com.atguigu.spzx.model.vo.common.Result;
@@ -12,6 +13,8 @@ import io.swagger.v3.oas.annotations.Parameters;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 @RestController
 @RequestMapping("/sysRole")
@@ -59,5 +62,20 @@ public class SysRoleController {
     public Result removeById(@PathVariable("id") Long id) {
         boolean flag = sysRoleService.removeSysRoleById(id);
         return flag ? Result.build(null, ResultCodeEnum.SUCCESS) : Result.build(null, ResultCodeEnum.FAIL);
+    }
+
+    @GetMapping("/getAssignedRole/{userId}")
+    @Operation(summary = "根据用户Id获取已分配的权限")
+    @Parameters({@Parameter(name = "userId", description = "用户", required = true)})
+    public Result<Map> getAssignedRole(@PathVariable Long userId) {
+        Map<String, Object> map = sysRoleService.getAssignedRoleInfo(userId);
+        return Result.build(map, ResultCodeEnum.SUCCESS);
+    }
+
+    @PostMapping("/assignRole")
+    @Operation(summary = "为用户分配相应权限")
+    public Result assignRole(@RequestBody AssignRoleDto assignRoleDto) {
+        boolean flag = sysRoleService.assignRoleForUser(assignRoleDto);
+        return flag? Result.build(null, ResultCodeEnum.SUCCESS): Result.build(null, ResultCodeEnum.FAIL);
     }
 }

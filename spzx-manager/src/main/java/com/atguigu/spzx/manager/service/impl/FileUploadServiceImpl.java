@@ -64,7 +64,6 @@ public class FileUploadServiceImpl implements FileUploadService {
             minioClient.putObject(objectArgs);
             log.info("uploaded successfully");
             // 返回文件在服务器中的地址
-            // 返回文件的访问地址
             return minioConfigProperty.getEndPoint() + "/" + minioConfigProperty.getBucketName() + "/" + uploadName;
         } catch (MinioException e) {
             e.printStackTrace();
