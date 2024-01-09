@@ -16,7 +16,7 @@ import java.util.Map;
 
 @RestController
 @Tag(name = "系统菜单相关接口")
-@RequestMapping("/sysMenu")
+@RequestMapping("api/system/sysMenu")
 public class SysMenuController {
     @Autowired
     private SysMenuService sysMenuService;
@@ -53,7 +53,7 @@ public class SysMenuController {
     @DeleteMapping("/{id}")
     public Result remove(@PathVariable Long id) {
         boolean res = sysMenuService.removeById(id);
-        return res ? Result.build(null, ResultCodeEnum.SUCCESS) : Result.build(null, 201, "不能删除父级菜单");
+        return res ? Result.build(null, ResultCodeEnum.SUCCESS) : Result.build(null, ResultCodeEnum.MENU_HAS_CHILDREN);
     }
 
     @Operation(summary = "获取菜单树和角色已分配的菜单")

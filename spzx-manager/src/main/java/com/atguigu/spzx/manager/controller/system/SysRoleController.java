@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/sysRole")
+@RequestMapping("/api/system/sysRole")
 @Tag(name = "系统权限相关接口")
 public class SysRoleController {
     @Autowired

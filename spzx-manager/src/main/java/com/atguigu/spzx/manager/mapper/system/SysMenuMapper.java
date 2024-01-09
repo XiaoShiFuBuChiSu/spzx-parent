@@ -31,6 +31,8 @@ public interface SysMenuMapper {
     int insertSysRoleMenu(SysRoleMenuDto sysRoleMenuDto);
 
     int getChildrenNum(Long id);
+
+    List<MenuTreeVo> selectMenusByUserId(Long id);
 }
 
 

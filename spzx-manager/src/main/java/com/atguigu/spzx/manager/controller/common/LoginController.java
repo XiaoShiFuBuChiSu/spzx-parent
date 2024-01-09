@@ -1,13 +1,15 @@
 package com.atguigu.spzx.manager.controller.common;
 
-import com.atguigu.spzx.manager.service.system.SysUserService;
 import com.atguigu.spzx.manager.service.common.ValidateCodeService;
+import com.atguigu.spzx.manager.service.system.SysMenuService;
+import com.atguigu.spzx.manager.service.system.SysUserService;
 import com.atguigu.spzx.model.dto.system.LoginDto;
+import com.atguigu.spzx.model.vo.common.LoginVo;
 import com.atguigu.spzx.model.vo.common.Result;
 import com.atguigu.spzx.model.vo.common.ResultCodeEnum;
-import com.atguigu.spzx.model.vo.common.LoginVo;
-import com.atguigu.spzx.model.vo.system.UserInfoVo;
 import com.atguigu.spzx.model.vo.common.ValidateCodeVo;
+import com.atguigu.spzx.model.vo.system.SysMenuVo;
+import com.atguigu.spzx.model.vo.system.UserInfoVo;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.Parameters;
@@ -16,6 +18,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * @Description TODO
@@ -26,13 +30,16 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 @RestController
 @Tag(name = "用户登录相关接口")
-@RequestMapping("/system")
+@RequestMapping("/api/system")
 public class LoginController {
     @Autowired
     private SysUserService sysUserService;
 
     @Autowired
     private ValidateCodeService validateCodeService;
+
+    @Autowired
+    private SysMenuService sysMenuService;
 
     @PostMapping("/login")
     @Operation(summary = "用户登录")
@@ -62,5 +69,12 @@ public class LoginController {
     public Result logout(@RequestHeader("token") String token) {
         sysUserService.userLogout(token);
         return Result.build(null, ResultCodeEnum.SUCCESS);
+    }
+
+    @GetMapping("/menuTree")
+    @Operation(summary = "获取系统菜单树")
+    public Result<List<SysMenuVo>> getSysMenuTree() {
+        List<SysMenuVo> menuTree = sysMenuService.getMenuTreeByUserId();
+        return Result.build(menuTree, ResultCodeEnum.SUCCESS);
     }
 }

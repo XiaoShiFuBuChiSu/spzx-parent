@@ -3,6 +3,7 @@ package com.atguigu.spzx.manager.service.system;
 import com.atguigu.spzx.model.dto.system.SysRoleMenuDto;
 import com.atguigu.spzx.model.entity.system.SysMenu;
 import com.atguigu.spzx.model.vo.system.MenuTreeVo;
+import com.atguigu.spzx.model.vo.system.SysMenuVo;
 
 import java.util.List;
 import java.util.Map;
@@ -21,4 +22,6 @@ public interface SysMenuService {
     Map<String, Object> getRoleMenuTree(Long roleId);
 
     void assignRoleMenu(SysRoleMenuDto sysRoleMenuDt);
+
+    List<SysMenuVo> getMenuTreeByUserId();
 }

@@ -35,8 +35,8 @@ spzx:
   intercept:
     exclude:
       urls:
-        - /system/login
-        - /system/validateCode
+        - /api/system/login
+        - /api/system/validateCode
         # 开放swagger
         - /doc.html
         - /webjars/css/**
