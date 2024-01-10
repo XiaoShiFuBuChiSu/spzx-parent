@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.atguigu.spzx.manager.mapper.product.ProductSpecMapper">
+
+    <resultMap id="BaseResultMap" type="com.atguigu.spzx.model.entity.product.ProductSpec">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="specName" column="spec_name" jdbcType="VARCHAR"/>
+            <result property="specValue" column="spec_value" jdbcType="VARCHAR"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+            <result property="isDeleted" column="is_deleted" jdbcType="TINYINT"/>
+    </resultMap>
+
+    <resultMap id="ProductSpecResultMap" type="ProductSpecVo">
+        <id property="id" column="id" jdbcType="BIGINT"/>
+        <result property="specName" column="spec_name" jdbcType="VARCHAR"/>
+        <result property="specValue" column="spec_value" jdbcType="VARCHAR"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="BaseColumns">
+        id,spec_name,spec_value,
+        create_time,update_time,is_deleted
+    </sql>
+    <sql id="pageColumns">
+        id,spec_name,spec_value,
+        create_time
+    </sql>
+    <insert id="insert">
+        insert into product_spec (spec_name, spec_value)
+        values (#{specName}, #{specValue})
+    </insert>
+    <update id="delete">
+        update product_spec
+        set is_deleted = 1
+        where id = #{id}
+    </update>
+    <update id="update">
+        update product_spec
+        <set>
+            <if test="specName != null and specName != ''">
+                spec_name = #{specName},
+            </if>
+            <if test="specValue != null and specValue != ''">
+                spec_value = #{specValue},
+            </if>
+            id = #{id}
+        </set>
+        where id = #{id}
+    </update>
+    <select id="selectPage" resultMap="ProductSpecResultMap">
+        select
+        <include refid="pageColumns"/>
+        from product_spec
+        where is_deleted = 0
+        order by create_time desc
+    </select>
+</mapper>
