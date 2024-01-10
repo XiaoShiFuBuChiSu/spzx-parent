@@ -1,6 +1,7 @@
 package com.atguigu.spzx.manager.mapper.product;
 
 import com.atguigu.spzx.model.entity.product.Brand;
+import com.atguigu.spzx.model.vo.product.BrandVo;
 
 import java.util.List;
 
@@ -22,7 +23,9 @@ public interface BrandMapper {
 
     int update(Brand brand);
 
-    List<Brand> selectAll();
+    List<BrandVo> selectAll();
+
+    List<BrandVo> selectAllByCategoryId(Object categoryId);
 }
 
 

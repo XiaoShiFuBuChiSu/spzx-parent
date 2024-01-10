@@ -4,6 +4,7 @@ import com.atguigu.spzx.manager.service.product.BrandService;
 import com.atguigu.spzx.model.entity.product.Brand;
 import com.atguigu.spzx.model.vo.common.Result;
 import com.atguigu.spzx.model.vo.common.ResultCodeEnum;
+import com.atguigu.spzx.model.vo.product.BrandVo;
 import com.github.pagehelper.PageInfo;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -12,6 +13,7 @@ import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @Tag(name = "商品品牌管理")
@@ -61,8 +63,9 @@ public class BrandController {
 
     @Operation(summary = "查询所有")
     @GetMapping("/findAll")
-    public Result findAll() {
-        List<Brand> brands = brandService.findAll();
+    public Result<BrandVo> findAll(@RequestParam(required = false) Map<String, Object> map) {
+        List<BrandVo> brands = brandService.findAll(map);
         return Result.build(brands, ResultCodeEnum.SUCCESS);
     }
+
 }

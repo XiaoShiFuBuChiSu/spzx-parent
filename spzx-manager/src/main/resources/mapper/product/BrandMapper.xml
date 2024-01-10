@@ -50,9 +50,15 @@
         from brand where id = #{id}
         and is_deleted = 0
     </select>
-    <select id="selectAll" resultType="com.atguigu.spzx.model.entity.product.Brand">
-        select
-        <include refid="BaseColumns"/>
-        from brand where is_deleted = 0
+    <select id="selectAll" resultType="brandVo">
+        select id, name
+        from brand
+        where is_deleted = 0
+    </select>
+    <select id="selectAllByCategoryId" resultType="com.atguigu.spzx.model.vo.product.BrandVo">
+        select b.id, b.name
+        from brand b
+                 inner join category_brand cb on b.id = cb.brand_id
+        where cb.category_id = #{categoryId}
     </select>
 </mapper>

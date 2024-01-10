@@ -12,13 +12,13 @@ import java.util.List;
 */
 public interface ProductSpecMapper {
 
-    List<ProductSpecVo> selectPage();
-
     int insert(ProductSpecVo productSpecVo);
 
     int delete(Long id);
 
     int update(ProductSpecVo productSpecVo);
+
+    List<ProductSpecVo> selectAll();
 }
 
 

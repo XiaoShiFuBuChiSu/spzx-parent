@@ -20,7 +20,7 @@ public class ProductSpecServiceImpl implements ProductSpecService {
     @Override
     public PageInfo<ProductSpecVo> queryPage(Integer current, Integer limit) {
         PageHelper.startPage(current, limit);
-        List<ProductSpecVo> list = productSpecMapper.selectPage();
+        List<ProductSpecVo> list = productSpecMapper.selectAll();
         return new PageInfo<>(list);
     }
 
@@ -40,5 +40,10 @@ public class ProductSpecServiceImpl implements ProductSpecService {
     public boolean edit(ProductSpecVo productSpecVo) {
         int res = productSpecMapper.update(productSpecVo);
         return res > 0;
+    }
+
+    @Override
+    public List<ProductSpecVo> findAll() {
+        return productSpecMapper.selectAll();
     }
 }

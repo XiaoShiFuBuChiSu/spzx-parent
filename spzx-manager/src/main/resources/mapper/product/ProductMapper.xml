@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.atguigu.spzx.manager.mapper.product.ProductMapper">
+
+    <resultMap id="ProductResultMap" type="product">
+        <id property="id" column="id" jdbcType="BIGINT"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="brandId" column="brand_id" jdbcType="BIGINT"/>
+        <result property="category1Id" column="category1_id" jdbcType="BIGINT"/>
+        <result property="category2Id" column="category2_id" jdbcType="BIGINT"/>
+        <result property="category3Id" column="category3_id" jdbcType="BIGINT"/>
+        <result property="unitName" column="unit_name" jdbcType="VARCHAR"/>
+        <result property="sliderUrls" column="slider_urls" jdbcType="VARCHAR"/>
+        <result property="specValue" column="spec_value" jdbcType="VARCHAR"/>
+        <result property="status" column="status" jdbcType="TINYINT"/>
+        <result property="auditStatus" column="audit_status" jdbcType="TINYINT"/>
+        <result property="auditMessage" column="audit_message" jdbcType="VARCHAR"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+        <result property="brandName" column="bname" jdbcType="VARCHAR"/>
+        <result property="category1Name" column="c1name" jdbcType="VARCHAR"/>
+        <result property="category2Name" column="c2name" jdbcType="VARCHAR"/>
+        <result property="category3Name" column="c3name" jdbcType="VARCHAR"/>
+        <result property="isDeleted" column="is_deleted" jdbcType="TINYINT"/>
+    </resultMap>
+
+    <sql id="BaseColumns">
+        id,name,brand_id,
+        category1_id,category2_id,category3_id,
+        unit_name,slider_urls,spec_value,
+        status,audit_status,audit_message,
+        create_time,update_time,is_deleted
+    </sql>
+
+    <sql id="ProductColumns">
+        p.id,
+        p.name,
+        brand_id,
+        b.name bname,
+            category1_id,
+            c1.name c1name,
+            category2_id,
+            c2.name c2name,
+            category3_id,
+            c3.name c3name,
+            unit_name,
+            slider_urls,
+            spec_value,
+            p.STATUS,
+            audit_status,
+            audit_message,
+            p.create_time,
+            p.update_time,
+            p.is_deleted
+    </sql>
+    <sql id="InsertColumns">
+        name,brand_id,
+        category1_id,category2_id,category3_id,
+        unit_name,slider_urls,spec_value
+    </sql>
+    <insert id="save" useGeneratedKeys="true" keyProperty="id">
+        insert into product
+        (<include refid="InsertColumns"/>)
+        values(#{name},#{brandId},
+        #{category1Id},#{category2Id},#{category3Id},
+        #{unitName},#{sliderUrls},#{specValue})
+    </insert>
+    <select id="selectPage" resultMap="ProductResultMap">
+        SELECT
+        <include refid="ProductColumns"/>
+        FROM
+        product p
+        LEFT JOIN brand b ON p.brand_id = b.id
+        LEFT JOIN category c1 ON p.category1_id = c1.id
+        LEFT JOIN category c2 ON p.category2_id = c2.id
+        LEFT JOIN category c3 ON p.category3_id = c3.id
+        <where>
+            <if test="brandId != null">
+                b.id = #{brandId}
+            </if>
+            <if test="category1Id !=null or category2Id != null or category3Id != null">
+                <choose>
+                    <when test="category1Id != null">
+                        and c1.id = #{category1Id}
+                    </when>
+                    <when test="category1Id != null">
+                        and c2.id = #{category2Id}
+                    </when>
+                    <when test="category1Id != null">
+                        and c3.id = #{category3Id}
+                    </when>
+                </choose>
+            </if>
+            and p.is_deleted = 0
+        </where>
+    </select>
+
+
+</mapper>

@@ -10,6 +10,8 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @Tag(name = "商品规格")
 @RequestMapping("/api/product/productSpec")
@@ -47,5 +49,11 @@ public class ProductSpecController {
         return res ? Result.build(null, ResultCodeEnum.SUCCESS) : Result.build(null, ResultCodeEnum.FAIL);
     }
 
+    @Operation(summary = "查询所有")
+    @GetMapping("/findAll")
+    public Result<ProductSpecVo> findAll(){
+        List<ProductSpecVo> list = productSpecService.findAll();
+        return Result.build(list, ResultCodeEnum.SUCCESS);
+    }
 
 }

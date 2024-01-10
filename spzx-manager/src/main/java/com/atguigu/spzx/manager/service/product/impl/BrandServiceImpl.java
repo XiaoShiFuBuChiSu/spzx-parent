@@ -3,6 +3,7 @@ package com.atguigu.spzx.manager.service.product.impl;
 import com.atguigu.spzx.manager.mapper.product.BrandMapper;
 import com.atguigu.spzx.manager.service.product.BrandService;
 import com.atguigu.spzx.model.entity.product.Brand;
+import com.atguigu.spzx.model.vo.product.BrandVo;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 @Transactional
@@ -49,8 +51,12 @@ public class BrandServiceImpl implements BrandService {
     }
 
     @Override
-    public List<Brand> findAll() {
-        return brandMapper.selectAll();
+    public List<BrandVo> findAll(Map<String, Object> map) {
+        if (map.isEmpty()) {
+            return brandMapper.selectAll();
+        } else if (map.containsKey("categoryId")) {
+            return brandMapper.selectAllByCategoryId(map.get("categoryId"));
+        }
+        return null;
     }
-
 }
