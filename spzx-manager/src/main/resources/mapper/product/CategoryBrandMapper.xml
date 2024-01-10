@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.atguigu.spzx.manager.mapper.product.CategoryBrandMapper">
+
+    <resultMap id="BaseResultMap" type="com.atguigu.spzx.model.entity.product.CategoryBrand">
+        <id property="id" column="id" jdbcType="BIGINT"/>
+        <result property="brandId" column="brand_id" jdbcType="BIGINT"/>
+        <result property="categoryId" column="category_id" jdbcType="BIGINT"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+        <result property="isDeleted" column="is_deleted" jdbcType="TINYINT"/>
+    </resultMap>
+
+    <resultMap id="CategoryBrandResultMap" type="categoryBrandVo">
+        <id property="id" column="id"/>
+        <result property="categoryId" column="category_id"/>
+        <result property="brandId" column="brand_id"/>
+        <result property="categoryName" column="cname"/>
+        <result property="brandName" column="bname"/>
+        <result property="logo" column="logo"/>
+    </resultMap>
+
+    <sql id="BaseColumns">
+        id,brand_id,category_id,
+        create_time,update_time,is_deleted
+    </sql>
+    <insert id="insert">
+        insert into category_brand (brand_id, category_id)
+        values (#{brandId}, #{categoryId})
+    </insert>
+    <update id="update">
+        update category_brand
+        <set>
+            <if test="categoryId != null">
+                category_id = #{categoryId}
+            </if>
+            <if test="brandId != null">
+                ,brand_id = #{brandId}
+            </if>
+            ,id = #{id}
+        </set>
+        where id = #{id}
+    </update>
+    <update id="deleteById">
+        update category_brand
+        set is_deleted = 1
+        where id = #{id}
+    </update>
+    <select id="selectPage" resultMap="CategoryBrandResultMap">
+        select cb.id, cb.category_id,cb.brand_id,c.name cname ,b.name bname ,b.logo
+        from category_brand cb
+        join brand b on cb.brand_id = b.id
+        join category c on cb.category_id = c.id
+        <where>
+            <if test="brandId != null">
+                brand_id = #{brandId}
+            </if>
+            <if test="categoryId != null">
+                and category_id = #{categoryId}
+            </if>
+            and cb.is_deleted = 0 and b.is_deleted=0 and c.is_deleted=0
+        </where>
+        order by cb.create_time desc
+    </select>
+</mapper>
