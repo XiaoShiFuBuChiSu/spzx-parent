@@ -24,7 +24,7 @@ public enum ResultCodeEnum {
     LOGIN_AUTH_ERROR(206, "用户未登录或登录超时"),
 
     // 501 ~ 599 业务错误
-    MENU_HAS_CHILDREN(501, "不能删除父级菜单");
+    MENU_HAS_CHILDREN(501, "不能删除父级菜单"), FILE_TYPE_ERROR(510, "文件类型错误");
 
     private Integer code;      // 业务状态码
     private String message;    // 响应消息

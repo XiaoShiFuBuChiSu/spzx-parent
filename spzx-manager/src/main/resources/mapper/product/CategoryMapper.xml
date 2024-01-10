@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.atguigu.spzx.manager.mapper.product.CategoryMapper">
+
+    <resultMap id="BaseResultMap" type="com.atguigu.spzx.model.entity.product.Category">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="name" column="name" jdbcType="VARCHAR"/>
+            <result property="imageUrl" column="image_url" jdbcType="VARCHAR"/>
+            <result property="parentId" column="parent_id" jdbcType="BIGINT"/>
+            <result property="status" column="status" jdbcType="TINYINT"/>
+            <result property="orderNum" column="order_num" jdbcType="INTEGER"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+            <result property="isDeleted" column="is_deleted" jdbcType="TINYINT"/>
+    </resultMap>
+
+    <sql id="BaseColumns">
+        id,name,image_url,
+        parent_id,status,order_num,
+        create_time,update_time,is_deleted
+    </sql>
+    <insert id="insertBatch">
+        insert into category (id, name, image_url, parent_id, status, order_num)
+        values
+        <foreach collection="categories" item="category" separator=",">
+            (#{category.id},#{category.name},#{category.imageUrl},
+            #{category.parentId},#{category.status},#{category.orderNum})
+        </foreach>
+    </insert>
+    <select id="selectByParentId" resultMap="BaseResultMap">
+        select
+        <include refid="BaseColumns"/>
+        from category
+        where parent_id = #{parendId}
+        and is_deleted = 0
+        order by order_num
+    </select>
+    <select id="getChildrenCount" resultType="java.lang.Integer">
+        select count(*)
+        from category
+        where parent_id = #{parentId}
+          and is_deleted = 0;
+    </select>
+    <select id="selectAll" resultMap="BaseResultMap">
+        select id,
+               name,
+               image_url,
+               parent_id,
+               status,
+               order_num
+        from category
+        where is_deleted = 0
+    </select>
+</mapper>

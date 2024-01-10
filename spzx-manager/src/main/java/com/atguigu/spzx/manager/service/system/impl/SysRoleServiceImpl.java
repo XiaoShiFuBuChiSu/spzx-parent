@@ -1,4 +1,4 @@
-package com.atguigu.spzx.manager.service.impl.system;
+package com.atguigu.spzx.manager.service.system.impl;
 
 import com.atguigu.spzx.manager.mapper.system.SysRoleMapper;
 import com.atguigu.spzx.manager.service.system.SysRoleService;

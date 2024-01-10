@@ -23,7 +23,7 @@ public class SysMenuController {
 
     @Operation(summary = "获取菜单树")
     @GetMapping("/menuTree")
-    public Result<MenuTreeVo> menuTree() {
+    public Result menuTree() {
         List<MenuTreeVo> menuTree = sysMenuService.getMenuTree();
         return Result.build(menuTree, ResultCodeEnum.SUCCESS);
     }

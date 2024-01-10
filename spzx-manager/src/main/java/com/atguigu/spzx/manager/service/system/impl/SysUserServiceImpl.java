@@ -1,4 +1,4 @@
-package com.atguigu.spzx.manager.service.impl.system;
+package com.atguigu.spzx.manager.service.system.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.atguigu.spzx.common.service.execption.GlobalResultException;

@@ -1,4 +1,4 @@
-package com.atguigu.spzx.manager.service.impl.common;
+package com.atguigu.spzx.manager.service.common.impl;
 
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.io.FileUtil;

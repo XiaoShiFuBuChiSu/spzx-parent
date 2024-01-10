@@ -106,5 +106,6 @@
           and sm.is_deleted = 0
           and srm.is_deleted = 0
           and sur.is_deleted = 0
+          and sm.status = 1
     </select>
 </mapper>

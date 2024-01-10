@@ -1,4 +1,4 @@
-package com.atguigu.spzx.manager.service.impl.system;
+package com.atguigu.spzx.manager.service.system.impl;
 
 import com.atguigu.spzx.common.service.utils.AuthContextUtil;
 import com.atguigu.spzx.manager.mapper.system.SysMenuMapper;
@@ -131,7 +131,7 @@ public class SysMenuServiceImpl implements SysMenuService {
      * @return
      */
     private MenuTreeVo findChildren(MenuTreeVo menuTreeVo, List<MenuTreeVo> treeNodes) {
-        menuTreeVo.setChildren(new ArrayList<MenuTreeVo>());
+        menuTreeVo.setChildren(new ArrayList<>());
         for (MenuTreeVo mt : treeNodes) {
             if (menuTreeVo.getId().longValue() == mt.getParentId().longValue()) {
                 if (menuTreeVo.getChildren() == null) {
