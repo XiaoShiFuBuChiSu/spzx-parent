@@ -5,24 +5,28 @@ import com.atguigu.spzx.manager.mapper.product.ProductDetailsMapper;
 import com.atguigu.spzx.manager.mapper.product.ProductMapper;
 import com.atguigu.spzx.manager.mapper.product.ProductSkuMapper;
 import com.atguigu.spzx.manager.service.product.ProductService;
+import com.atguigu.spzx.model.dto.product.ProductDetailsDto;
 import com.atguigu.spzx.model.dto.product.ProductDto;
-import com.atguigu.spzx.model.dto.product.ProductSaveDto;
+import com.atguigu.spzx.model.dto.product.ProductInfoDto;
 import com.atguigu.spzx.model.entity.product.Product;
 import com.atguigu.spzx.model.entity.product.ProductDetails;
 import com.atguigu.spzx.model.entity.product.ProductSku;
 import com.atguigu.spzx.model.vo.common.ResultCodeEnum;
+import com.atguigu.spzx.model.vo.product.ProductInfoVo;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.ObjectUtils;
 
 import java.util.List;
 
 @Service
 @Transactional
 public class ProductServiceImpl implements ProductService {
+
     @Autowired
     private ProductMapper productMapper;
 
@@ -40,10 +44,10 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public boolean save(ProductSaveDto productSaveDto) {
+    public boolean save(ProductInfoDto productInfoDto) {
         // 添加到产品信息表
         Product product = new Product();
-        BeanUtils.copyProperties(productSaveDto, product);
+        BeanUtils.copyProperties(productInfoDto, product);
         int result = productMapper.save(product);
         if (product.getId() == null || result <= 0) {
             throw new GlobalResultException(ResultCodeEnum.NETWORK_ERROR);
@@ -53,19 +57,19 @@ public class ProductServiceImpl implements ProductService {
         // 添加到详情
         ProductDetails productDetails = new ProductDetails();
         productDetails.setProductId(productId);
-        productDetails.setImageUrls(productSaveDto.getDetailsImageUrls());
+        productDetails.setImageUrls(productInfoDto.getDetailsImageUrls());
         int detailResult = productDetailsMapper.save(productDetails);
         if (detailResult <= 0) {
             throw new GlobalResultException(ResultCodeEnum.NETWORK_ERROR);
         }
 
         // 添加到sku
-        List<ProductSku> productSkus = productSaveDto.getProductSkuList();
+        List<ProductSku> productSkus = productInfoDto.getProductSkuList();
         // skuCode和skuName需要自己添加
         for (int i = 0; i < productSkus.size(); i++) {
             ProductSku productSku = productSkus.get(i);
             productSku.setSkuCode(productId + "_" + (i + 1));
-            productSku.setSkuName(product.getName()+" "+productSku.getSkuSpec());
+            productSku.setSkuName(product.getName() + " " + productSku.getSkuSpec());
             productSku.setProductId(productId);
         }
         int skuResult = productSkuMapper.saveBatch(productSkus);
@@ -73,5 +77,23 @@ public class ProductServiceImpl implements ProductService {
             throw new GlobalResultException(ResultCodeEnum.NETWORK_ERROR);
         }
         return true;
+    }
+
+    @Override
+    public ProductInfoVo getById(Long id) {
+        // 获取商品
+        ProductInfoDto productInfoDto = productMapper.getById(id);
+        if (ObjectUtils.isEmpty(productInfoDto)) {
+            throw new GlobalResultException(ResultCodeEnum.NETWORK_ERROR);
+        }
+        // 获取商品详情
+        ProductDetailsDto productDetailsDto = productDetailsMapper.getByProductId(id);
+        productInfoDto.setDetailsImageUrls(productDetailsDto.getImageUrls());
+        // 获取商品Sku
+        List<ProductSku> productSkuList = productSkuMapper.getProductSkuListByProductId(id);
+        productInfoDto.setProductSkuList(productSkuList);
+        ProductInfoVo productInfoVo = new ProductInfoVo();
+        BeanUtils.copyProperties(productInfoDto, productInfoVo);
+        return productInfoVo;
     }
 }

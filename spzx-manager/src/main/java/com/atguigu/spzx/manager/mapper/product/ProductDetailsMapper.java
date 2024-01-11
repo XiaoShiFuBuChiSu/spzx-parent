@@ -1,5 +1,6 @@
 package com.atguigu.spzx.manager.mapper.product;
 
+import com.atguigu.spzx.model.dto.product.ProductDetailsDto;
 import com.atguigu.spzx.model.entity.product.ProductDetails;
 
 /**
@@ -11,6 +12,8 @@ import com.atguigu.spzx.model.entity.product.ProductDetails;
 public interface ProductDetailsMapper {
 
     int save(ProductDetails productDetails);
+
+    ProductDetailsDto getByProductId(Long id);
 }
 
 

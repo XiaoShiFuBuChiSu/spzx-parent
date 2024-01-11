@@ -60,6 +60,11 @@
         category1_id,category2_id,category3_id,
         unit_name,slider_urls,spec_value
     </sql>
+    <sql id="QueryColumns">
+        id,name,brand_id,
+        category1_id,category2_id,category3_id,
+        unit_name,slider_urls,spec_value
+    </sql>
     <insert id="save" useGeneratedKeys="true" keyProperty="id">
         insert into product
         (<include refid="InsertColumns"/>)
@@ -95,6 +100,11 @@
             </if>
             and p.is_deleted = 0
         </where>
+    </select>
+    <select id="getById" resultType="com.atguigu.spzx.model.dto.product.ProductInfoDto">
+        select
+        <include refid="QueryColumns"/>
+        from product where id = #{id} and is_deleted = 0
     </select>
 
 

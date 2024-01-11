@@ -13,6 +13,12 @@ import java.util.List;
 public interface ProductUnitMapper {
 
     List<ProductUnitVo> findAll();
+
+    int save(ProductUnitVo productUnitVo);
+
+    int delete(Long id);
+
+    boolean update(ProductUnitVo productUnitVo);
 }
 
 

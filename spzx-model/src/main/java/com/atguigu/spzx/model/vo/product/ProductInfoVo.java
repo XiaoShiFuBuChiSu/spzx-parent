@@ -1,12 +1,13 @@
-package com.atguigu.spzx.model.dto.product;
+package com.atguigu.spzx.model.vo.product;
 
 import com.atguigu.spzx.model.entity.product.ProductSku;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Data
-public class ProductSaveDto {
+public class ProductInfoVo implements Serializable {
     private Long id;
     private String name;
     private Long brandId;

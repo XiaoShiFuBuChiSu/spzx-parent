@@ -2,10 +2,11 @@ package com.atguigu.spzx.manager.controller.product;
 
 import com.atguigu.spzx.manager.service.product.ProductService;
 import com.atguigu.spzx.model.dto.product.ProductDto;
-import com.atguigu.spzx.model.dto.product.ProductSaveDto;
+import com.atguigu.spzx.model.dto.product.ProductInfoDto;
 import com.atguigu.spzx.model.entity.product.Product;
 import com.atguigu.spzx.model.vo.common.Result;
 import com.atguigu.spzx.model.vo.common.ResultCodeEnum;
+import com.atguigu.spzx.model.vo.product.ProductInfoVo;
 import com.github.pagehelper.PageInfo;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -30,8 +31,15 @@ public class ProductController {
 
     @PostMapping("/save")
     @Operation(summary = "添加商品信息")
-    public Result save(@RequestBody ProductSaveDto productSaveDto) {
-        boolean result = productService.save(productSaveDto);
+    public Result save(@RequestBody ProductInfoDto productInfoDto) {
+        boolean result = productService.save(productInfoDto);
         return Result.build(null, ResultCodeEnum.SUCCESS);
+    }
+
+    @GetMapping("/getById/{id}")
+    @Operation(summary = "根据Id查询")
+    public Result getById(@PathVariable Long id) {
+        ProductInfoVo productInfoVo = productService.getById(id);
+        return Result.build(productInfoVo, ResultCodeEnum.SUCCESS);
     }
 }

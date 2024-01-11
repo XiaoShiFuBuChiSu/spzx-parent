@@ -13,6 +13,8 @@ import java.util.List;
 public interface ProductSkuMapper {
 
     int saveBatch(List<ProductSku> productSkus);
+
+    List<ProductSku> getProductSkuListByProductId(Long id);
 }
 
 

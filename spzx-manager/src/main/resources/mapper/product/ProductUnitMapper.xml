@@ -16,10 +16,27 @@
         id,name,create_time,
         update_time,is_deleted
     </sql>
+    <insert id="save">
+        insert into product_unit (name)
+        values (#{name})
+    </insert>
+    <update id="delete">
+        update product_unit set is_deleted = 1 where id = #{id}
+    </update>
+    <update id="update">
+        update product_unit
+        <set>
+            <if test="name != null and name != ''">
+                name = #{name},
+            </if>
+            id = #{id}
+        </set>
+        where id = #{id}
+    </update>
     <select id="findAll" resultType="productUnitVo">
-        select id, name
+        select id, name, create_time
         from product_unit
         where is_deleted = 0
-        order by create_time
+        order by create_time desc
     </select>
 </mapper>

@@ -24,4 +24,9 @@
         insert into product_details (<include refid="InsertColumns"/>)
         values (#{productId},#{imageUrls})
     </insert>
+    <select id="getByProductId" resultType="com.atguigu.spzx.model.dto.product.ProductDetailsDto">
+        select image_urls
+        from product_details
+        where product_id = #{id} and is_deleted = 0
+    </select>
 </mapper>

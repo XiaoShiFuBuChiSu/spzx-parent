@@ -49,4 +49,21 @@
             #{productSku.marketPrice},#{productSku.costPrice},#{productSku.stockNum},#{productSku.skuSpec},#{productSku.weight},#{productSku.volume})
         </foreach>
     </insert>
+    <select id="getProductSkuListByProductId" resultType="com.atguigu.spzx.model.entity.product.ProductSku">
+        select id,
+               sku_code,
+               sku_name,
+               product_id,
+               thumb_img,
+               sale_price,
+               market_price,
+               cost_price,
+               stock_num,
+               sku_spec,
+               weight,
+               volume
+        from product_sku
+        where product_id = #{id}
+          and is_deleted = 0
+    </select>
 </mapper>
