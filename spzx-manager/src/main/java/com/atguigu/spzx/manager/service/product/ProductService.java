@@ -12,4 +12,12 @@ public interface ProductService {
     boolean save(ProductInfoDto productSaveDto);
 
     ProductInfoVo getById(Long id);
+
+    boolean editById(ProductInfoDto productInfoDto);
+
+    boolean removeById(Long id);
+
+    int changeAuditStatus(Long id, Integer auditStatus);
+
+    int changeStatus(Long id, Integer status);
 }

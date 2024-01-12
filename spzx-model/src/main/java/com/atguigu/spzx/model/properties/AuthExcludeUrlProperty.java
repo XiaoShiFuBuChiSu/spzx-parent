@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Data
-@ConfigurationProperties(prefix = "spzx.intercept.exclude")
+@ConfigurationProperties("spzx.intercept.exclude")
 @Component
 public class AuthExcludeUrlProperty {
     private List<String> urls;

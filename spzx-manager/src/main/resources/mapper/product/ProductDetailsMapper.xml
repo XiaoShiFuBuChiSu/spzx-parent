@@ -5,12 +5,12 @@
 <mapper namespace="com.atguigu.spzx.manager.mapper.product.ProductDetailsMapper">
 
     <resultMap id="BaseResultMap" type="com.atguigu.spzx.model.entity.product.ProductDetails">
-            <id property="id" column="id" jdbcType="BIGINT"/>
-            <result property="productId" column="product_id" jdbcType="BIGINT"/>
-            <result property="imageUrls" column="image_urls" jdbcType="VARCHAR"/>
-            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
-            <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
-            <result property="isDeleted" column="is_deleted" jdbcType="TINYINT"/>
+        <id property="id" column="id" jdbcType="BIGINT"/>
+        <result property="productId" column="product_id" jdbcType="BIGINT"/>
+        <result property="imageUrls" column="image_urls" jdbcType="VARCHAR"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+        <result property="isDeleted" column="is_deleted" jdbcType="TINYINT"/>
     </resultMap>
 
     <sql id="BaseColumns">
@@ -24,9 +24,21 @@
         insert into product_details (<include refid="InsertColumns"/>)
         values (#{productId},#{imageUrls})
     </insert>
+    <update id="update">
+        update product_details
+        <set>
+            <if test="imageUrls != null and imageUrls !=''">
+                image_urls = #{imageUrls}
+            </if>
+            ,product_id = #{productId}
+        </set>
+        where product_id = #{productId} and is_deleted = 0
+    </update>
+
     <select id="getByProductId" resultType="com.atguigu.spzx.model.dto.product.ProductDetailsDto">
         select image_urls
         from product_details
-        where product_id = #{id} and is_deleted = 0
+        where product_id = #{id}
+          and is_deleted = 0
     </select>
 </mapper>

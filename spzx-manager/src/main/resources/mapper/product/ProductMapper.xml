@@ -26,6 +26,28 @@
         <result property="isDeleted" column="is_deleted" jdbcType="TINYINT"/>
     </resultMap>
 
+    <resultMap id="ProductInfoResultMap" type="productInfoDto">
+        <id property="id" column="id" jdbcType="BIGINT"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="brandId" column="brand_id" jdbcType="BIGINT"/>
+        <result property="category1Id" column="category1_id" jdbcType="BIGINT"/>
+        <result property="category2Id" column="category2_id" jdbcType="BIGINT"/>
+        <result property="category3Id" column="category3_id" jdbcType="BIGINT"/>
+        <result property="unitName" column="unit_name" jdbcType="VARCHAR"/>
+        <result property="sliderUrls" column="slider_urls" jdbcType="VARCHAR"/>
+        <result property="specValue" column="spec_value" jdbcType="VARCHAR"/>
+        <result property="status" column="status" jdbcType="TINYINT"/>
+        <result property="auditStatus" column="audit_status" jdbcType="TINYINT"/>
+        <result property="auditMessage" column="audit_message" jdbcType="VARCHAR"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+        <result property="brandName" column="bname" jdbcType="VARCHAR"/>
+        <result property="category1Name" column="c1name" jdbcType="VARCHAR"/>
+        <result property="category2Name" column="c2name" jdbcType="VARCHAR"/>
+        <result property="category3Name" column="c3name" jdbcType="VARCHAR"/>
+        <result property="isDeleted" column="is_deleted" jdbcType="TINYINT"/>
+    </resultMap>
+
     <sql id="BaseColumns">
         id,name,brand_id,
         category1_id,category2_id,category3_id,
@@ -61,9 +83,19 @@
         unit_name,slider_urls,spec_value
     </sql>
     <sql id="QueryColumns">
-        id,name,brand_id,
-        category1_id,category2_id,category3_id,
-        unit_name,slider_urls,spec_value
+        p.id,p.name,
+        brand_id,
+        b.name bname,
+        category1_id,
+        c1.name c1name,
+        category2_id,
+        c2.name c2name,
+        category3_id,
+        c3.name c3name,
+        unit_name,
+        slider_urls,
+        spec_value,
+        p.create_time
     </sql>
     <insert id="save" useGeneratedKeys="true" keyProperty="id">
         insert into product
@@ -72,6 +104,53 @@
         #{category1Id},#{category2Id},#{category3Id},
         #{unitName},#{sliderUrls},#{specValue})
     </insert>
+    <update id="update">
+        update product
+        <set>
+            <if test="name != null and name != ''">
+                name =#{name},
+            </if>
+
+            <if test="brandId != null">
+                brand_id = #{brandId},
+            </if>
+            <if test="category1Id != null">
+                category1_id = #{category1Id},
+            </if>
+            <if test="category2Id != null">
+                category2_id = #{category2Id},
+            </if>
+            <if test="category3Id != null">
+                category3_id = #{category3Id},
+            </if>
+            <if test="unitName != null and unitName != ''">
+                unit_name = #{unitName},
+            </if>
+            <if test="sliderUrls != null and sliderUrls != ''">
+                slider_urls = #{sliderUrls},
+            </if>
+            <if test="specValue != null and specValue != ''">
+                spec_value = #{specValue},
+            </if>
+            <if test="auditStatus != null">
+                audit_status = #{auditStatus},
+            </if>
+            <if test="auditMessage != null and auditMessage != ''">
+                audit_message = #{auditMessage},
+            </if>
+            <if test="status != null">
+                status = #{status},
+            </if>
+            id = #{id}
+        </set>
+        where id = #{id} and is_deleted = 0
+    </update>
+    <update id="delete">
+        update product
+        set is_deleted = 1
+        where id = #{id}
+    </update>
+
     <select id="selectPage" resultMap="ProductResultMap">
         SELECT
         <include refid="ProductColumns"/>
@@ -85,27 +164,26 @@
             <if test="brandId != null">
                 b.id = #{brandId}
             </if>
-            <if test="category1Id !=null or category2Id != null or category3Id != null">
-                <choose>
-                    <when test="category1Id != null">
-                        and c1.id = #{category1Id}
-                    </when>
-                    <when test="category1Id != null">
-                        and c2.id = #{category2Id}
-                    </when>
-                    <when test="category1Id != null">
-                        and c3.id = #{category3Id}
-                    </when>
-                </choose>
+            <if test="category1Id != null">
+                and c1.id = #{category1Id}
+            </if>
+            <if test="category2Id != null">
+                and c2.id = #{category2Id}
+            </if>
+            <if test="category3Id != null">
+                and c3.id = #{category3Id}
             </if>
             and p.is_deleted = 0
         </where>
     </select>
-    <select id="getById" resultType="com.atguigu.spzx.model.dto.product.ProductInfoDto">
+    <select id="getById" resultMap="ProductInfoResultMap">
         select
         <include refid="QueryColumns"/>
-        from product where id = #{id} and is_deleted = 0
+        from product p
+        LEFT JOIN brand b ON p.brand_id = b.id
+        LEFT JOIN category c1 ON p.category1_id = c1.id
+        LEFT JOIN category c2 ON p.category2_id = c2.id
+        LEFT JOIN category c3 ON p.category3_id = c3.id
+        where p.id = #{id} and p.is_deleted = 0
     </select>
-
-
 </mapper>

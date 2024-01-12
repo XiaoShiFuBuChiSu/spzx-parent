@@ -18,4 +18,9 @@ public interface ProductMapper {
     int save(Product product);
 
     ProductInfoDto getById(Long id);
+
+    int update(Product product);
+
+    int delete(Long id);
+
 }

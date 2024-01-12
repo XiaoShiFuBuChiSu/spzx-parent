@@ -15,6 +15,10 @@ public interface ProductSkuMapper {
     int saveBatch(List<ProductSku> productSkus);
 
     List<ProductSku> getProductSkuListByProductId(Long id);
+
+    int deleteByProductId(Long id);
+
+    void update(ProductSku productSku);
 }
 
 

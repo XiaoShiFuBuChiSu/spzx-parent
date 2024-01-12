@@ -96,4 +96,50 @@ public class ProductServiceImpl implements ProductService {
         BeanUtils.copyProperties(productInfoDto, productInfoVo);
         return productInfoVo;
     }
+
+    @Override
+    public boolean editById(ProductInfoDto productInfoDto) {
+        // 更新product
+        Product product = new Product();
+        BeanUtils.copyProperties(productInfoDto, product);
+        int res = productMapper.update(product);
+        // 更新productDetails
+        ProductDetails productDetails = new ProductDetails();
+        productDetails.setImageUrls(productInfoDto.getDetailsImageUrls());
+        productDetails.setProductId(productInfoDto.getId());
+        int resDetail = productDetailsMapper.update(productDetails);
+        // 更新productSku
+        List<ProductSku> productSkus = productInfoDto.getProductSkuList();
+        productSkus.forEach(productSku -> productSkuMapper.update(productSku));
+        return true;
+    }
+
+    @Override
+    public boolean removeById(Long id) {
+        // 删除商品
+        int res = productMapper.delete(id);
+        // 删除商品详情
+        int resDetail = productDetailsMapper.deleteByProductId(id);
+        // 删除商品SKU
+        int resSku = productSkuMapper.deleteByProductId(id);
+        return true;
+    }
+
+    @Override
+    public int changeAuditStatus(Long id, Integer auditStatus) {
+        Product product = new Product();
+        product.setId(id);
+        product.setAuditStatus(auditStatus);
+        product.setAuditMessage(auditStatus == 1 ? "审核通过" : "驳回申请");
+        return productMapper.update(product);
+    }
+
+    @Override
+    public int changeStatus(Long id, Integer status) {
+        Product product = new Product();
+        product.setId(id);
+        product.setStatus(status);
+        return productMapper.update(product);
+    }
+
 }

@@ -37,18 +37,52 @@
         sku_code,sku_name,
         product_id,thumb_img,sale_price,
         market_price,cost_price,stock_num,
-        sku_spec,weight,
-        volume
+        sku_spec,weight,volume,sale_num,status
     </sql>
     <insert id="saveBatch">
         insert into product_sku
         (<include refid="InsertColumns"/>)
         values
         <foreach collection="productSkus" item="productSku" index="index" separator=",">
-            (#{productSku.skuCode},#{productSku.skuName},#{productSku.productId},#{productSku.thumbImg},#{productSku.salePrice},
-            #{productSku.marketPrice},#{productSku.costPrice},#{productSku.stockNum},#{productSku.skuSpec},#{productSku.weight},#{productSku.volume})
+            (#{productSku.skuCode},#{productSku.skuName},#{productSku.productId},#{productSku.thumbImg},
+            #{productSku.salePrice},#{productSku.marketPrice},#{productSku.costPrice},#{productSku.stockNum},
+            #{productSku.skuSpec},#{productSku.weight},#{productSku.volume},0,0)
         </foreach>
     </insert>
+    <update id="deleteByProductId">
+        update product_sku
+        set is_deleted = 1
+        where product_id = #{product_id}
+          and is_deleted = 0
+    </update>
+    <update id="update">
+        update product_sku
+        <set>
+            <if test="thumbImg != null and thumbImg != ''">
+                thumb_img = #{thumbImg},
+            </if>
+            <if test="salePrice != null">
+                sale_price = #{salePrice},
+            </if>
+            <if test="marketPrice != null">
+                market_price = #{marketPrice},
+            </if>
+            <if test="costPrice != null">
+                cost_price = #{costPrice},
+            </if>
+            <if test="stockNum != null">
+                stock_num = #{stockNum},
+            </if>
+            <if test="weight != null">
+                weight = #{weight},
+            </if>
+            <if test="volume != null">
+                volume = #{volume},
+            </if>
+            id = #{id}
+        </set>
+        where id = #{id} and is_deleted = 0
+    </update>
     <select id="getProductSkuListByProductId" resultType="com.atguigu.spzx.model.entity.product.ProductSku">
         select id,
                sku_code,

@@ -14,6 +14,11 @@ public interface ProductDetailsMapper {
     int save(ProductDetails productDetails);
 
     ProductDetailsDto getByProductId(Long id);
+
+    int update(ProductDetails productDetails);
+
+    int deleteByProductId(Long productId);
+
 }
 
 

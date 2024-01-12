@@ -42,4 +42,32 @@ public class ProductController {
         ProductInfoVo productInfoVo = productService.getById(id);
         return Result.build(productInfoVo, ResultCodeEnum.SUCCESS);
     }
+
+    @PutMapping("/updateById")
+    @Operation(summary = "根据Id修改")
+    public Result editById(@RequestBody ProductInfoDto productInfoDto){
+         boolean res = productService.editById(productInfoDto);
+         return Result.build(null,ResultCodeEnum.SUCCESS);
+    }
+
+    @Operation(summary = "根据Id删除")
+    @DeleteMapping("/deleteById/{id}")
+    public Result editById(@PathVariable Long id){
+        boolean res = productService.removeById(id);
+        return Result.build(null,ResultCodeEnum.SUCCESS);
+    }
+
+    @Operation(summary = "修改审核状态")
+    @GetMapping("/updateAuditStatus/{id}/{auditStatus}")
+    public Result changeAuditStatus(@PathVariable Long id, @PathVariable Integer auditStatus){
+        int res = productService.changeAuditStatus(id,auditStatus);
+        return Result.build(null,ResultCodeEnum.SUCCESS);
+    }
+
+    @Operation(summary = "修改商品状态")
+    @GetMapping("/updateStatus/{id}/{status}")
+    public Result changeStatus(@PathVariable Long id, @PathVariable Integer status){
+        int res = productService.changeStatus(id,status);
+        return Result.build(null,ResultCodeEnum.SUCCESS);
+    }
 }
