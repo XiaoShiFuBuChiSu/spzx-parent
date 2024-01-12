@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.atguigu.spzx.manager.mapper.order.OrderStatisticsMapper">
+
+    <resultMap id="BaseResultMap" type="com.atguigu.spzx.model.entity.order.OrderStatistics">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="orderDate" column="order_date" jdbcType="DATE"/>
+            <result property="totalAmount" column="total_amount" jdbcType="DECIMAL"/>
+            <result property="totalNum" column="total_num" jdbcType="INTEGER"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+            <result property="isDeleted" column="is_deleted" jdbcType="TINYINT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,order_date,total_amount,
+        total_num,create_time,update_time,
+        is_deleted
+    </sql>
+    <insert id="insert">
+        insert into order_statistics (order_date, total_amount, total_num)
+        values (#{orderDate}, #{totalAmount}, #{totalNum})
+    </insert>
+    <select id="getAll" resultType="com.atguigu.spzx.model.entity.order.OrderStatistics">
+        select id,
+        order_date,
+        total_amount,
+        total_num
+        from order_statistics
+        <where>
+            <if test="createTimeBegin != null and createTimeBegin != '' ">
+                order_date >= #{createTimeBegin}
+            </if>
+            <if test="createTimeEnd != null and createTimeEnd != ''">
+                and order_date &lt;= #{createTimeEnd}
+            </if>
+            and is_deleted = 0
+        </where>
+    </select>
+</mapper>
