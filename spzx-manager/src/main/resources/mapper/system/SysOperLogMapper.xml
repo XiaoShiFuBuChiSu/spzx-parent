@@ -48,4 +48,25 @@
         #{operIp},#{operParam},#{jsonResult},
         #{status},#{errorMsg})
     </insert>
+    <select id="getAll" resultType="com.atguigu.spzx.model.entity.system.SysOperLog">
+        select
+        <include refid="BaseColumns"/>
+        from sys_oper_log
+        <where>
+            <if test="title != null and title !=''">
+                title like concat('%',#{title},'%')
+            </if>
+            <if test="operName != null and operName != ''">
+                and oper_name like concat('%',#{operName},'%')
+            </if>
+            <if test="createTimeBegin != null and createTimeBegin != '' ">
+                and create_time >= #{createTimeBegin}
+            </if>
+            <if test="createTimeEnd != null and createTimeEnd != ''">
+                and create_time &lt;= #{createTimeEnd}
+            </if>
+            and is_deleted = 0
+        </where>
+        order by create_time desc
+    </select>
 </mapper>

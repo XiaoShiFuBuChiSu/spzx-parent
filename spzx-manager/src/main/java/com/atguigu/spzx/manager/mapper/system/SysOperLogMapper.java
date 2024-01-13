@@ -1,6 +1,9 @@
 package com.atguigu.spzx.manager.mapper.system;
 
+import com.atguigu.spzx.model.dto.system.SysOperLogDto;
 import com.atguigu.spzx.model.entity.system.SysOperLog;
+
+import java.util.List;
 
 /**
  * @author 19556
@@ -11,6 +14,8 @@ import com.atguigu.spzx.model.entity.system.SysOperLog;
 public interface SysOperLogMapper {
 
     int insert(SysOperLog sysOperLog);
+
+    List<SysOperLog> getAll(SysOperLogDto sysOperLogDto);
 }
 
 

@@ -42,6 +42,7 @@ public class CategoryBrandController {
     }
 
     @DeleteMapping("/deleteById/{id}")
+    @Operation(summary = "删除")
     public Result remove(@PathVariable Long id) {
         boolean res = categoryBrandService.removeById(id);
         return res ? Result.build(null, ResultCodeEnum.SUCCESS) : Result.build(null, ResultCodeEnum.FAIL);
