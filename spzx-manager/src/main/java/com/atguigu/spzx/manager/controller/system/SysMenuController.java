@@ -1,5 +1,8 @@
 package com.atguigu.spzx.manager.controller.system;
 
+import com.atguigu.spzx.common.log.annotation.Log;
+import com.atguigu.spzx.common.log.enums.BusinessType;
+import com.atguigu.spzx.common.log.enums.OperatorType;
 import com.atguigu.spzx.manager.service.system.SysMenuService;
 import com.atguigu.spzx.model.dto.system.SysRoleMenuDto;
 import com.atguigu.spzx.model.entity.system.SysMenu;
@@ -28,6 +31,7 @@ public class SysMenuController {
         return Result.build(menuTree, ResultCodeEnum.SUCCESS);
     }
 
+    @Log(title = "添加菜单", businessType = BusinessType.INSERT, operatorType = OperatorType.MANAGER)
     @Operation(summary = "添加菜单")
     @PostMapping
     public Result save(@RequestBody SysMenu sysMenu) {
@@ -36,6 +40,7 @@ public class SysMenuController {
     }
 
     @Operation(summary = "修改菜单")
+    @Log(title = "修改菜单", businessType = BusinessType.UPDATE, operatorType = OperatorType.MANAGER)
     @PutMapping
     public Result modify(@RequestBody SysMenu sysMenu) {
         boolean res = sysMenuService.modifyMenu(sysMenu);
@@ -49,6 +54,7 @@ public class SysMenuController {
         return sysMenu != null ? Result.build(sysMenu, ResultCodeEnum.SUCCESS) : Result.build(null, ResultCodeEnum.FAIL);
     }
 
+    @Log(title = "根据id删除菜单", businessType = BusinessType.DELETE, operatorType = OperatorType.MANAGER)
     @Operation(summary = "根据id删除")
     @DeleteMapping("/{id}")
     public Result remove(@PathVariable Long id) {
@@ -65,6 +71,7 @@ public class SysMenuController {
 
     @Operation(summary = "分配菜单给角色")
     @PutMapping("/assignRoleMenu")
+    @Log(title = "为权限分配菜单", businessType = BusinessType.UPDATE, operatorType = OperatorType.MANAGER)
     public Result assignRoleMenu(@RequestBody SysRoleMenuDto sysRoleMenuDto) {
         sysMenuService.assignRoleMenu(sysRoleMenuDto);
         return Result.build(null, ResultCodeEnum.SUCCESS);

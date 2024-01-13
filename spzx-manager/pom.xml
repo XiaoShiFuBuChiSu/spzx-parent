@@ -45,7 +45,7 @@
 
         <!-- common-service依赖 -->
         <dependency>
-            <groupId>com.atguigu.spzx</groupId>
+            <groupId>com.atguigu.spzx.common</groupId>
             <artifactId>common-service</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>

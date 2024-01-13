@@ -1,4 +1,4 @@
-package com.atguigu.spzx.common.service.utils;
+package com.atguigu.spzx.common.utils.auth;
 
 import com.atguigu.spzx.model.entity.system.SysUser;
 

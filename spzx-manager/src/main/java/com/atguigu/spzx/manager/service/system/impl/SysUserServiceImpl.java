@@ -2,14 +2,14 @@ package com.atguigu.spzx.manager.service.system.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.atguigu.spzx.common.service.execption.GlobalResultException;
-import com.atguigu.spzx.common.service.utils.AuthContextUtil;
+import com.atguigu.spzx.common.utils.auth.AuthContextUtil;
 import com.atguigu.spzx.manager.mapper.system.SysUserMapper;
 import com.atguigu.spzx.manager.service.system.SysUserService;
 import com.atguigu.spzx.model.dto.system.LoginDto;
 import com.atguigu.spzx.model.dto.system.SysUserDto;
 import com.atguigu.spzx.model.entity.system.SysUser;
-import com.atguigu.spzx.model.vo.common.ResultCodeEnum;
 import com.atguigu.spzx.model.vo.common.LoginVo;
+import com.atguigu.spzx.model.vo.common.ResultCodeEnum;
 import com.atguigu.spzx.model.vo.system.UserInfoVo;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;

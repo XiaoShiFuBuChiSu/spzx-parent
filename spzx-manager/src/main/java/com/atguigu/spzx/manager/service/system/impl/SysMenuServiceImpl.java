@@ -1,6 +1,6 @@
 package com.atguigu.spzx.manager.service.system.impl;
 
-import com.atguigu.spzx.common.service.utils.AuthContextUtil;
+import com.atguigu.spzx.common.utils.auth.AuthContextUtil;
 import com.atguigu.spzx.manager.mapper.system.SysMenuMapper;
 import com.atguigu.spzx.manager.service.system.SysMenuService;
 import com.atguigu.spzx.model.dto.system.SysRoleMenuDto;

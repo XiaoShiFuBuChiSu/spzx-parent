@@ -9,9 +9,8 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <groupId>com.atguigu.spzx</groupId>
+    <groupId>com.atguigu.spzx.common</groupId>
     <artifactId>common-utils</artifactId>
-    <version>1.0-SNAPSHOT</version>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>

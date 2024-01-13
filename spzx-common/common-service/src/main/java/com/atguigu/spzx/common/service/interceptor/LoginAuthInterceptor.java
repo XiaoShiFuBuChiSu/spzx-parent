@@ -2,7 +2,7 @@ package com.atguigu.spzx.common.service.interceptor;
 
 import com.alibaba.fastjson.JSON;
 import com.atguigu.spzx.common.service.execption.GlobalResultException;
-import com.atguigu.spzx.common.service.utils.AuthContextUtil;
+import com.atguigu.spzx.common.utils.auth.AuthContextUtil;
 import com.atguigu.spzx.model.entity.system.SysUser;
 import com.atguigu.spzx.model.vo.common.ResultCodeEnum;
 import jakarta.servlet.http.HttpServletRequest;

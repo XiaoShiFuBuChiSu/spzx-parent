@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.atguigu.spzx.manager.mapper.system.SysOperLogMapper">
+
+    <resultMap id="BaseResultMap" type="com.atguigu.spzx.model.entity.system.SysOperLog">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="title" column="title" jdbcType="VARCHAR"/>
+            <result property="businessType" column="business_type" jdbcType="VARCHAR"/>
+            <result property="method" column="method" jdbcType="VARCHAR"/>
+            <result property="requestMethod" column="request_method" jdbcType="VARCHAR"/>
+            <result property="operatorType" column="operator_type" jdbcType="VARCHAR"/>
+            <result property="operName" column="oper_name" jdbcType="VARCHAR"/>
+            <result property="operUrl" column="oper_url" jdbcType="VARCHAR"/>
+            <result property="operIp" column="oper_ip" jdbcType="VARCHAR"/>
+            <result property="operParam" column="oper_param" jdbcType="VARCHAR"/>
+            <result property="jsonResult" column="json_result" jdbcType="VARCHAR"/>
+            <result property="status" column="status" jdbcType="INTEGER"/>
+            <result property="errorMsg" column="error_msg" jdbcType="VARCHAR"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+            <result property="isDeleted" column="is_deleted" jdbcType="TINYINT"/>
+    </resultMap>
+
+    <sql id="BaseColumns">
+        id,title,business_type,
+        method,request_method,operator_type,
+        oper_name,oper_url,
+        oper_ip,oper_param,json_result,
+        status,error_msg,
+        create_time,update_time,is_deleted
+    </sql>
+    <sql id="InsertColumns" >
+        title,business_type,
+        method,request_method,operator_type,
+        oper_name,oper_url,
+        oper_ip,oper_param,json_result,
+        status,error_msg
+    </sql>
+    <insert id="insert">
+        insert into sys_oper_log
+        (<include refid="InsertColumns"/>)
+        values
+        (#{title},#{businessType},
+        #{method},#{requestMethod},#{operatorType},
+        #{operName},#{operUrl},
+        #{operIp},#{operParam},#{jsonResult},
+        #{status},#{errorMsg})
+    </insert>
+</mapper>

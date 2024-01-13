@@ -17,6 +17,7 @@
     <modules>
         <module>common-utils</module>
         <module>common-service</module>
+        <module>common-log</module>
     </modules>
 
     <properties>
