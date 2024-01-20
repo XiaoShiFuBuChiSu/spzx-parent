@@ -14,11 +14,11 @@ public class Knife4jConfig {
     public GroupedOpenApi adminApi() {      // 创建了一个api接口的分组
         return GroupedOpenApi.builder()
                 .group("admin-api")         // 分组名称
-                .pathsToMatch("/**")  // 接口请求路径规则
+                .pathsToMatch("/**") // 接口请求路径规则
                 .build();
     }
 
-    /***
+    /**
      * @description 自定义接口信息
      */
     @Bean
@@ -28,7 +28,7 @@ public class Knife4jConfig {
                 .info(new Info()
                         .title("尚品甄选API接口文档")
                         .version("1.0")
-                        .description("微博客API接口文档")
+                        .description("尚品甄选API接口文档")
                         .contact(new Contact().name("WJR"))); // 设定作者
     }
 

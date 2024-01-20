@@ -30,7 +30,7 @@ import java.util.List;
 @Slf4j
 @RestController
 @Tag(name = "用户登录相关接口")
-@RequestMapping("/api/system")
+@RequestMapping("/system")
 public class LoginController {
     @Autowired
     private SysUserService sysUserService;

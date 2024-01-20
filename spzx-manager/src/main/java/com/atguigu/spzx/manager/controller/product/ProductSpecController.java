@@ -14,7 +14,7 @@ import java.util.List;
 
 @RestController
 @Tag(name = "商品规格")
-@RequestMapping("/api/product/productSpec")
+@RequestMapping("/product/productSpec")
 public class ProductSpecController {
 
     @Autowired

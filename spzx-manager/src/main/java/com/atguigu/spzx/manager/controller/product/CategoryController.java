@@ -14,7 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/product/category")
+@RequestMapping("/product/category")
 @Tag(name = "商品分类管理")
 public class CategoryController {
 

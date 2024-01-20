@@ -14,7 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/product/product")
+@RequestMapping("/product/product")
 @Tag(name = "产品管理")
 public class ProductController {
     @Autowired

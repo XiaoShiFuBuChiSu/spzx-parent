@@ -1,0 +1,18 @@
+server:
+  port: 8511
+  servlet:
+    context-path: /api/product
+
+spring:
+  application:
+    name: service-product
+  cloud:
+    nacos:
+      server-addr: 192.168.11.222:8848
+      discovery:
+        namespace: ccd13385-2994-4132-8bd2-2a6de5870884
+      config:
+        namespace: ccd13385-2994-4132-8bd2-2a6de5870884
+  config:
+    import:
+      - nacos:spzx-service-dev.yaml

@@ -13,6 +13,9 @@
         <module>spzx-model</module>
         <module>spzx-common/common-utils</module>
         <module>spzx-manager</module>
+        <module>spzx-service</module>
+        <module>spzx-gateway</module>
+        <module>spzx-gateway</module>
     </modules>
 
     <parent>
@@ -30,6 +33,9 @@
         <jodatime.version>2.10.1</jodatime.version>
         <lombok.version>1.18.20</lombok.version>
         <mybatis.version>3.0.1</mybatis.version>
+        <cloud.version>2022.0.2</cloud.version>
+        <alibaba.version>2022.0.0.0-RC2</alibaba.version>
+        <alipay.version>4.8.73.ALL</alipay.version>
     </properties>
 
     <!-- 管理依赖，版本锁定 -->
@@ -83,6 +89,29 @@
                 <groupId>com.github.pagehelper</groupId>
                 <artifactId>pagehelper-spring-boot-starter</artifactId>
                 <version>1.4.6</version>
+            </dependency>
+
+            <!-- Spring Cloud -->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!-- Spring Cloud Alibaba -->
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>${alibaba.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!--导入支付宝支付sdk-->
+            <dependency>
+                <groupId>com.alipay.sdk</groupId>
+                <artifactId>alipay-sdk-java</artifactId>
+                <version>${alipay.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

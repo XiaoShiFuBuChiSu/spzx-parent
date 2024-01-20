@@ -1,6 +1,8 @@
 # 配置服务端口号
 server:
   port: 8501
+  servlet:
+    context-path: /admin
 
 # 配置数据库连接信息
 spring:
@@ -35,8 +37,8 @@ spzx:
   intercept:
     exclude:
       urls:
-        - /api/system/login
-        - /api/system/validateCode
+        - /system/login
+        - /system/validateCode
         # 开放swagger
         - /doc.html
         - /webjars/css/**

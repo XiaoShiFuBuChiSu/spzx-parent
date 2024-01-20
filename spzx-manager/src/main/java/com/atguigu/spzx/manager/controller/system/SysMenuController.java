@@ -19,7 +19,7 @@ import java.util.Map;
 
 @RestController
 @Tag(name = "系统菜单相关接口")
-@RequestMapping("api/system/sysMenu")
+@RequestMapping("/system/sysMenu")
 public class SysMenuController {
     @Autowired
     private SysMenuService sysMenuService;

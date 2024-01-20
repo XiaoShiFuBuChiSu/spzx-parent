@@ -13,7 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @Tag(name = "文件上传相关接口")
-@RequestMapping("/api/system/file")
+@RequestMapping("/system/file")
 public class FileUploadController {
 
     @Autowired

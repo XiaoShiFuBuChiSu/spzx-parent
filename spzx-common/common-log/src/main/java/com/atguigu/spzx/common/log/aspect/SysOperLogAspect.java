@@ -28,7 +28,7 @@ import java.util.Map;
 @Slf4j
 public class SysOperLogAspect {
 
-    @Autowired
+    @Autowired(required = false)
     private AsyncOptLogService asyncOptLogService;
 
     /**

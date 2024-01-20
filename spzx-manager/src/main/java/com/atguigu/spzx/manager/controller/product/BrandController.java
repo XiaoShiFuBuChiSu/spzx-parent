@@ -17,7 +17,7 @@ import java.util.Map;
 
 @RestController
 @Tag(name = "商品品牌管理")
-@RequestMapping("/api/product/brand")
+@RequestMapping("/product/brand")
 public class BrandController {
 
     @Autowired

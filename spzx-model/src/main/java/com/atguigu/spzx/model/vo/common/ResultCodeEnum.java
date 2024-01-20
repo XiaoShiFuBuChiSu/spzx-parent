@@ -23,9 +23,12 @@ public enum ResultCodeEnum {
 
     LOGIN_AUTH_ERROR(206, "用户未登录或登录超时"),
 
+    REGISTRY_CODE_EXPIRED(207, "短信验证码验证码已过期，请重新发送"),
+    USERNAME_CONTAINS_ERROR(208, "用户名已存在"),
+
     // 501 ~ 599 业务错误
     MENU_HAS_CHILDREN(501, "不能删除父级菜单"),
-    NETWORK_ERROR(502, "操作失败，请检查网络设置"),
+    NETWORK_ERROR(502, "网络错误，请稍候再试"),
     FILE_TYPE_ERROR(510, "文件类型错误");
 
     private Integer code;      // 业务状态码

@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @Tag(name = "订单统计")
-@RequestMapping("/api/order/orderInfo")
+@RequestMapping("/order/orderInfo")
 public class OrderInfoController {
 
     @Autowired

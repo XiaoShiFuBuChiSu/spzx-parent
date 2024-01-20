@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @Tag(name = "分类品牌管理")
-@RequestMapping("/api/product/categoryBrand")
+@RequestMapping("/product/categoryBrand")
 public class CategoryBrandController {
     @Autowired
     private CategoryBrandService categoryBrandService;

@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/system/sysUser")
+@RequestMapping("/system/sysUser")
 @Tag(name = "系统用户相关接口")
 public class SysUserController {
     @Autowired
