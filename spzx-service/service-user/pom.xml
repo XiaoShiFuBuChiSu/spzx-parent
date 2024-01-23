@@ -9,7 +9,7 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <groupId>com.atguigu.spzx.user</groupId>
+    <groupId>com.atguigu.spzx.service.user</groupId>
     <artifactId>service-user</artifactId>
 
     <properties>

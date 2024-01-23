@@ -16,6 +16,8 @@
         <module>spzx-service</module>
         <module>spzx-gateway</module>
         <module>spzx-gateway</module>
+        <module>spzx-feign-client</module>
+        <module>spzx-feign-client/feign-product-client</module>
     </modules>
 
     <parent>

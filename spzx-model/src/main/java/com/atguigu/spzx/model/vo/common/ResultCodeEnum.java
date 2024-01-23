@@ -21,15 +21,19 @@ public enum ResultCodeEnum {
 
     LOGIN_VERIFY_CODE_ERROR(205, "验证码错误"),
 
-    LOGIN_AUTH_ERROR(206, "用户未登录或登录超时"),
+    USERNAME_CONTAINS_ERROR(206, "用户名已存在"),
 
     REGISTRY_CODE_EXPIRED(207, "短信验证码验证码已过期，请重新发送"),
-    USERNAME_CONTAINS_ERROR(208, "用户名已存在"),
+    LOGIN_AUTH_ERROR(208, "用户未登录或登录超时"),
 
     // 501 ~ 599 业务错误
     MENU_HAS_CHILDREN(501, "不能删除父级菜单"),
     NETWORK_ERROR(502, "网络错误，请稍候再试"),
+    USER_ADDRESS_ERROR(503, "用户地址错误，请检查地址是否正确"),
+    PRODUCT_STOCK_ERROR(504, "商品库存不足，请重新选择商品规格"),
+    PRODUCT_NOT_CONTAINS(505, "商品不存在或已经下架，请选择其他商品"),
     FILE_TYPE_ERROR(510, "文件类型错误");
+
 
     private Integer code;      // 业务状态码
     private String message;    // 响应消息

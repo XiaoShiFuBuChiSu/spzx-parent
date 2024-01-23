@@ -33,8 +33,9 @@ public class SysOperLogAspect {
 
     /**
      * 环绕通知处理日志
-     * @param joinPoint     连接点
-     * @param log           日志注解
+     *
+     * @param joinPoint 连接点
+     * @param log       日志注解
      * @return 目标方法执行结果
      */
     @Around(value = "@annotation(log)")
@@ -54,10 +55,11 @@ public class SysOperLogAspect {
 
     /**
      * 执行方法后添加日志信息
-     * @param sysOperLog    日志信息对象
-     * @param log           日志注解
-     * @param result        方法返回结果
-     * @param e             方法异常
+     *
+     * @param sysOperLog 日志信息对象
+     * @param log        日志注解
+     * @param result     方法返回结果
+     * @param e          方法异常
      */
     private void generateLogAfterMethod(SysOperLog sysOperLog, Log log, Object result, Throwable e) {
         sysOperLog.setStatus(0);
@@ -74,9 +76,10 @@ public class SysOperLogAspect {
 
     /**
      * 执行方法前添加日志信息
-     * @param sysOperLog    日志信息对象
-     * @param log           日志注解
-     * @param joinPoint     连接点
+     *
+     * @param sysOperLog 日志信息对象
+     * @param log        日志注解
+     * @param joinPoint  连接点
      */
     private void generateLogBeforeMethod(SysOperLog sysOperLog, Log log, ProceedingJoinPoint joinPoint) {
         sysOperLog.setTitle(log.title());   // 标题

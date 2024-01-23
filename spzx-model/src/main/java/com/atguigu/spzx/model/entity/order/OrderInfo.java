@@ -5,9 +5,11 @@ import lombok.Data;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 订单
+ *
  * @TableName order_info
  */
 @Data
@@ -146,6 +148,11 @@ public class OrderInfo implements Serializable {
      * 删除标记（0:不可用 1:可用）
      */
     private Integer isDeleted;
+
+    /**
+     * 订单项列表
+     */
+    List<OrderItem> orderItemList;
 
     private static final long serialVersionUID = 1L;
 }

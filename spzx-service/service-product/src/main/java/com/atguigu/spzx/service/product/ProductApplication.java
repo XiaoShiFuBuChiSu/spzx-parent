@@ -8,7 +8,7 @@ import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
 @MapperScan("com.atguigu.spzx.service.product.mapper")
-@ComponentScan({"com.atguigu.spzx.common.service.execption","com.atguigu.spzx.service.product"})
+@ComponentScan({"com.atguigu.spzx"})
 @EnableCaching      // 开启缓存注解驱动
 public class ProductApplication {
     public static void main(String[] args) {
